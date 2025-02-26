@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+body {
+    margin: 0;
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+.navbar {
+    background-color: #343a40;
+    padding: 1.5rem 0;
+}
+.navbar-brand, .nav-link {
+    color: #fff !important;
+    font-size: 2rem;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.navh:hover{
+    background-color: #ffc107;
+    border-radius: 5px;
+    border: none;
+}
+
+.hero-section {
+    /* background: url('image/img2.jpg') no-repeat start start/cover; */
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #555f68, #424951);
+    background-position: calc(50% - .1px) center;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 90%);
+    color: #fff;
+    /* color: #e63737; */
+    text-align: center;
+}
+.hero-section h1 {
+    font-size: 6rem;
+    font-weight: bold;
+}
+.hero-section p {
+    font-size: 2rem;
+    margin-top: 20px;
+}
+.section {
+    padding: 60px 0;
+    font-size: 2rem;
+}
+.section h2 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.card {
+    margin-bottom: 20px;
+}
+.star-rating {
+    color: #ffc107;
+}
+.footer {
+    padding: 10rem;
+    height: 100%;
+    font-size: 2rem;
+    background-image: linear-gradient(to right, #555f68, #424951);
+    background-position: calc(50% - 2px) center;
+    /* clip-path: polygon(0% 100%, 100% 100%, 100% 14%, 0% 0%); */
+    color: #fff;
+    padding: 40px 0;
+}
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: #ffc107;
+}
+.footer .search-bar {
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 2rem;
+}
+/* .blur {
+    filter: blur(5px);
+    pointer-events: none;
+} */
+.form-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+}
+.form-overlay.active {
+    display: block;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+.cart-icon {
+    position: relative;
+    margin-left: 20px;
+}
+.cart-icon .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+.customer-support {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+.customer-support a {
+    color: #fff;
+    padding: 2rem;
+    font-size: 4rem;
+}
+
+/* cart */
+
+/* Cart Overlay Styles */
+/* Floating Cart Button */
+#cart-btn {
+    margin: 5px;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+}
+#cart-count {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+    display: none; /* Hidden when cart is empty */
+}
+
+/* #cart-btn {
+    position: fixed;
+    top: 40rem;
+    right: 80rem;
+    background: #ff9800;
+    color: white;
+    padding: 10px 15px;
+    margin: 2rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    z-index: 2000;
+} */
+
+/* Cart Overlay */
+.cart-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    width: 50%;
+}
+
+.cart-overlay.active {
+    display: block;
+}
+
+.close-cart-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+#cart-items li {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}

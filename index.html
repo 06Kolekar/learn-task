@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eLearning Website</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="CSS/style.css" />
+    <style>
+      /* Add custom styles for the form overlays */
+      .form-overlay {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none; /* Hidden by default */
+        width: 50%;
+      }
+
+      .form-overlay.active {
+        display: block;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .peye,
+      .pseye {
+        position: absolute;
+        color: blue;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#" style="text-transform: none"
+          >eLearning</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link navh ms-5 rounded" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navh ms-5 rounded" href="#about">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown navh ms-5 rounded"
+                href="#"
+                id="courseDropdown"
+                role="button"
+                >Free Course</a
+              >
+              <ul class="dropdown-menu" aria-labelledby="courseDropdown">
+                <li><a class="dropdown-item fs-3 navh" href="#">Java</a></li>
+                <li><a class="dropdown-item fs-3 navh" href="#">Python</a></li>
+                <li><a class="dropdown-item fs-3 navh" href="#">AI</a></li>
+                <li><a class="dropdown-item fs-3 navh" href="#">ML</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown navh ms-5 rounded"
+                href="#"
+                id="shareMarketDropdown"
+                role="button"
+                >Advance Course</a
+              >
+              <ul class="dropdown-menu" aria-labelledby="shareMarketDropdown">
+                <li>
+                  <a class="dropdown-item fs-3 navh" href="#"
+                    >Auto-Tracking 1</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item fs-3 navh" href="#"
+                    >Auto-Tracking 2</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item fs-3 navh" href="#"
+                    >Auto-Tracking 3</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item fs-3 navh" href="#"
+                    >Auto-Tracking 4</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navh ms-5 rounded" href="#contact">Contact</a>
+            </li>
+          </ul>
+          <!-- Cart Button -->
+          <button id="cart-btn" class="btn btn-warning position-relative">
+            <i class="fas fa-shopping-cart"></i> Cart 
+            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger">
+              0
+            </span>
+          </button>
+          <button
+            class="btn btn-warning ms-5 fs-3 rounded"
+            id="toggle-form-btn"
+          >
+            Sign-In / Sign-Up
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sign In Form Overlay -->
+    <div class="form-overlay w-50 fs-3" id="signin-form">
+      <button class="close-btn fs-1" id="close-signin">×</button>
+      <h2 class="text-center mb-4">Sign In</h2>
+      <form id="signinForm">
+        <div class="mb-3">
+          <label for="loginEmail" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control fs-3"
+            style="text-transform: lowercase"
+            id="loginEmail"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="mb-3 position-relative">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control fs-3"
+            id="loginPassword"
+            placeholder="Enter your password"
+            required
+          />
+          <div class="peye">
+            <i class="bi bi-eye" id="open-eye" style="display: block"></i>
+            <i class="bi bi-eye-slash" id="close-eye" style="display: none"></i>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 fs-3">
+          Sign In
+        </button>
+        <div class="container text-center mt-3">
+          <p>
+            If you don't have an account,
+            <a href="#" id="switch-to-signup" style="text-decoration: none"
+              >Sign Up</a
+            >
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sign Up Form Overlay -->
+    <div class="form-overlay w-50 fs-3" id="signup-form">
+      <button class="close-btn fs-3" id="close-signup">×</button>
+      <h2 class="text-center mb-4">Sign Up</h2>
+      <form id="signupForm">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control fs-3"
+            id="firstName"
+            placeholder="Enter your first name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control fs-3"
+            id="lastName"
+            placeholder="Enter your last name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="mobileNumber" class="form-label">Mobile Number</label>
+          <input
+            type="tel"
+            class="form-control fs-3"
+            id="mobileNumber"
+            placeholder="Enter your mobile number"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control fs-3"
+            id="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="mb-3 position-relative">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control fs-3"
+            id="password"
+            placeholder="Enter your password"
+            required
+          />
+          <div class="pseye">
+            <i class="bi bi-eye" id="s-open-eye" style="display: block"></i>
+            <i
+              class="bi bi-eye-slash"
+              id="s-close-eye"
+              style="display: none"
+            ></i>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control fs-3"
+            id="confirmPassword"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary w-100 fs-3">
+          Sign Up
+        </button>
+        <div class="container text-center mt-3">
+          <p>
+            If you already have an account,
+            <a href="#" id="switch-to-signin" style="text-decoration: none"
+              >Sign In</a
+            >
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <section id="home" class="hero-section">
+      <div>
+        <h1>Welcome to eLearning</h1>
+        <p>Your gateway to professional growth and personal development.</p>
+        <a href="#about" class="btn btn-primary btn-lg fs-1">Learn More</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-light">
+      <div class="container text-center">
+        <h2 style="font-size: 5rem">About Us</h2>
+      </div>
+      <div class="container card bg-gradient shadow">
+        <p>
+          We are an online learning platform that offers various courses to help
+          you grow professionally and personally. Join us to enhance your skills
+          and knowledge.
+        </p>
+      </div>
+    </section>
+
+    <!--<div class="container mt-5">
+      <h2 class="text-center mb-5" style="font-size: 5rem; font-weight: 600">
+        Our Products
+      </h2>
+
+      <div class="row fs-1">
+        <div class="col-md-4">
+          <div class="card text-center">
+            <img src="" class="card-img-top" alt="Product 1" />
+            <div class="card-body">
+              <h5 class="card-title">Product 1</h5>
+              <p class="card-text">
+                This is a high-quality product with great features.
+              </p>
+              <p class="fw-bold">$49.99</p>
+              <div class="column">
+                <a href="#" class="btn btn-primary mb-1 fs-1">Add to Cart</a>
+                <a href="#" class="btn btn-primary mb-1 fs-1">Buy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card text-center">
+            <img src="" class="card-img-top" alt="Product 2" />
+            <div class="card-body">
+              <h5 class="card-title">Product 2</h5>
+              <p class="card-text">
+                Premium quality product with excellent durability.
+              </p>
+              <p class="fw-bold">$59.99</p>
+              <div class="column">
+                <a href="#" class="btn btn-primary mb-1 fs-1">Add to Cart</a>
+                <a href="#" class="btn btn-primary mb-1 fs-1">Buy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card text-center">
+            <img src="" class="card-img-top" alt="Product 3" />
+            <div class="card-body">
+              <h5 class="card-title">Product 3</h5>
+              <p class="card-text">
+                Affordable and reliable product for everyday use.
+              </p>
+              <p class="fw-bold">$39.99</p>
+              <div class="column">
+                <a href="#" class="btn btn-primary mb-1 fs-1">Add to Cart</a>
+                <a href="#" class="btn btn-primary mb-1 fs-1">Buy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center">
+            <img src="" class="card-img-top" alt="Product 4" />
+            <div class="card-body">
+              <h5 class="card-title">Product 4</h5>
+              <p class="card-text">
+                Affordable and reliable product for everyday use.
+              </p>
+              <p class="fw-bold">$39.99</p>
+              <div class="column">
+                <a href="#" class="btn btn-primary mb-1 fs-1">Add to Cart</a>
+                <a href="#" class="btn btn-primary mb-1 fs-1">Buy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+    <!-- Course Section -->
+    <section id="courses" class="section bg-light">
+      <div class="container text-center">
+        <h2 style="font-size: 5rem">Our Courses</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title fs-1">Java Programming</h5>
+                <p class="card-text">
+                  Learn Java from scratch and build real-world applications.
+                </p>
+                <a href="#" class="btn btn-primary mb-1 fs-1">free</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title fs-1">Python for Beginners</h5>
+                <p class="card-text">
+                  Master Python programming and data analysis.
+                </p>
+                <a href="#" class="btn btn-primary mb-1 fs-1">free</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title fs-1">Artificial Intelligence</h5>
+                <p class="card-text">
+                  Explore AI concepts and build intelligent systems.
+                </p>
+                <a href="#" class="btn btn-primary mb-1 fs-1">free</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advance Course Section -->
+    <section id="share-market" class="section bg-light">
+      <div class="container text-center">
+        <h2 style="font-size: 5rem">Advance Course</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title fs-1">Auto-Tracking 1</h5>
+                <p class="card-text">
+                  Automated tracking for stock market trends.
+                </p>
+                <p class="fw-bold">$39.99</p>
+                <div class="column">
+                  <a href="#" class="btn btn-primary mb-1 fs-1" data-name="Product 1">Add to Cart</a>
+                  <a href="#" class="btn btn-primary mb-1 fs-1">Buy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title fs-1">Auto-Tracking 2</h5>
+                <p class="card-text">Advanced tools for market analysis.</p>
+                <p class="fw-bold">$39.99</p>
+                <div class="column">
+                  <a href="#" class="btn btn-primary mb-1 fs-1" data-name="Product 2">Add to Cart</a>
+                  <a href="#" class="btn btn-primary mb-1 fs-1" >Buy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title fs-1">Auto-Tracking 3</h5>
+                <p class="card-text">Real-time updates and insights.</p>
+                <p class="fw-bold">$39.99</p>
+                <div class="column">
+                  <a href="#" class="btn btn-primary mb-1 fs-1" data-name="Product 3">Add to Cart</a>
+                  <a href="#" class="btn btn-primary mb-1 fs-1">Buy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <!-- Shopping Cart Overlay -->
+      <div id="cart-overlay" class="cart-overlay">
+        <div class="cart-content">
+          <button class="close-cart-btn fs-1" id="close-cart">×</button>
+          <h2 class="text-center mb-4">Your Cart</h2>
+          <ul id="cart-items" class="list-unstyled"></ul>
+          <button class="btn btn-primary w-100 fs-3" id="checkout-btn">
+            Checkout
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client Reviews Section -->
+    <section id="reviews" class="section">
+      <div class="container text-center">
+        <h2 style="font-size: 5rem">Client Reviews</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">John Doe</h5>
+                <div class="star-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="card-text">
+                  "Excellent courses and great support. Highly recommended!"
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Jane Smith</h5>
+                <div class="star-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="card-text">
+                  "The interactive sessions are very engaging and informative."
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Mike Johnson</h5>
+                <div class="star-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <p class="card-text">
+                  "Great platform for learning new skills and advancing my
+                  career."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="container text-center">
+        <h2 style="font-size: 5rem">Contact Us</h2>
+      </div>
+      <div class="container bg-light-subtle rounded-3 shadow">
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label m-2">Your Name</label>
+            <input
+              type="text"
+              class="form-control fs-3 mt-2"
+              id="name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label m-2">Your Email</label>
+            <input
+              type="email"
+              class="form-control fs-3 mt-2"
+              id="email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label m-2">Your Message</label>
+            <textarea
+              class="form-control fs-3 mt-2"
+              id="message"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary fs-3 mt-3 mb-3">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Quick Links</h3>
+            <ul class="list-unstyled">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#reviews">Reviews</a></li>
+              <li><a href="#courses">Course</a></li>
+              <li><a href="#share-market">Share Market</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h3>Follow Us</h3>
+            <ul class="list-unstyled">
+              <li>
+                <a href="https://www.youtube.com/"
+                  ><i class="fab fa-youtube"></i> YouTube</a
+                >
+              </li>
+              <li>
+                <a href="https://www.facebook.com/"
+                  ><i class="fab fa-facebook"></i> Facebook</a
+                >
+              </li>
+              <li>
+                <a href="https://www.instagram.com/"
+                  ><i class="fab fa-instagram"></i> Instagram</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h3>Customer Support</h3>
+            <div class="customer-support">
+              <a href="htttps://www.whatsapp.com/"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+              <a href="https://www.gmail.com"
+                ><i class="fas fa-envelope"></i
+              ></a>
+              <a href="#"><i class="fas fa-phone"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <p>&copy; 2023 eLearning. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script/script.js"></script>
+  </body>
+</html>
